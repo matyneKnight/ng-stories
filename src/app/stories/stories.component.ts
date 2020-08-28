@@ -8,6 +8,9 @@ import { IStorie } from './stories.interface';
 })
 export class StoriesComponent implements OnInit {
   private _stories: IStorie[] = null;
+  activePosition: number = 0
+  progressTimerId = null;
+  progressTimer = 10000;
 
   @Input()
   set stories(values: IStorie[]) {
@@ -20,6 +23,20 @@ export class StoriesComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.handleProgressTiming();
+  }
+
+  public handleProgressTiming(): void {
+    this.progressTimerId = setTimeout(
+      () => {
+        if (this.activePosition < this.stories.length) {
+          this.handleProgressTiming()
+        }
+
+        this.activePosition +=  1;
+      },
+      this.progressTimer
+    );
   }
 
 }

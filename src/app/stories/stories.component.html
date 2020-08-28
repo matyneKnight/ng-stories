@@ -2,18 +2,19 @@
   <div class="progress-bars">
     <span
       *ngFor="let storie of stories | keyvalue"
-      [class.bar-active]=""
+      [style.--duration]="progressTimer/1000 + 's'"
+      [class.bar-active]="activePosition == storie.key"
       [class.bar-paused]=""
-      [class.bar-passed]=""
+      [class.bar-passed]="activePosition >= storie.key"
     ></span>
   </div>
 
   <div
     class="stories"
     *ngIf="stories"
-    [class.media-storie]="stories[1].type === 'image'"
-    [style.--url]="'url(' + stories[1].content + ')'"
+    [class.media-storie]="stories[activePosition].type === 'image'"
+    [style.--url]="'url(' + stories[activePosition].content + ')'"
   >
-    <p *ngIf="stories[1].type === 'text'">{{ stories[1].content }}</p>
+    <p *ngIf="stories[activePosition].type === 'text'">{{ stories[activePosition].content }}</p>
   </div>
 </div>
