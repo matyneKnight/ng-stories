@@ -8,9 +8,9 @@ import { IStorie } from './stories.interface';
 })
 export class StoriesComponent implements OnInit, OnDestroy {
   private _stories: IStorie[] = null;
-  activePosition: number = 0
+  activePosition: number = 0;
   progressTimerId = null;
-  timer = 10;
+  timer = 3;
   timeStarted = null;
   timeRemains = this.timer * 1000;
   paused = false;
@@ -35,10 +35,13 @@ export class StoriesComponent implements OnInit, OnDestroy {
       () => {
         this.timeRemains = this.timer * 1000;
         if (this.activePosition < this.stories.length) {
-          this.handleProgressTiming()
+          this.handleProgressTiming();
         }
 
         this.activePosition +=  1;
+        if (this.activePosition+1 == this.stories.length) {
+          clearTimeout(this.progressTimerId);
+        }
       },
       this.timeRemains
     );

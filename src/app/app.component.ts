@@ -21,9 +21,5 @@ export class AppComponent {
       type: 'text',
       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis laboriosam, quo, quidem libero ex omnis accusamus necessitatibus distinctio, quod maxime in. Aspernatur quaerat maiores tenetur reprehenderit repudiandae temporibus repellendus animi.'
     },
-    {
-      type: 'image',
-      content: 'https://www.bookweb.org/sites/default/files/gallery/BLM.png'
-    }
   ]
 }
