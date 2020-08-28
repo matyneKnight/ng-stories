@@ -1,0 +1,63 @@
+.container {
+  margin: 50px auto auto;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 50%;
+
+  .progress-bars {
+    z-index: 12000;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+
+    @keyframes Loader {
+      0% {
+        background-position: 100% 0;
+      }
+      100% {
+        background-position: 0 0;
+      }
+    }
+  
+    span {
+      height: 8px;
+      flex-grow: 1;
+      border-radius: 4px;
+      margin: 0 3px;
+      display: flex;
+      background-image: -webkit-linear-gradient(
+        left,
+        rgba(255, 255, 255, 0.5) 0%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(88, 89, 104, 0.5) 50.001%,
+        rgba(88, 89, 104, 0.5) 100%
+      );;
+      background-repeat: no-repeat;
+      background-size: 200%;
+      background-color: rgb(97, 96, 96);
+      background-position: 100% 50%;
+      animation-timing-function: linear;
+      animation-duration: 10s;
+    }
+  
+    .bar-active {
+      animation-name: Loader;
+    }
+  
+    .bar-passed {
+      background-position: 0 0;
+    }
+  
+    .bar-paused {
+      animation-play-state: paused;
+    }
+  }
+
+  .stories {
+    
+  }
+}

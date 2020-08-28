@@ -1,1 +1,13 @@
-<p>stories works!</p>
+<div class="container">
+  <div class="progress-bars">
+    <span
+    *ngFor="let storie of stories | keyvalue"
+    [class.bar-active]=""
+    [class.bar-paused]=""
+    [class.bar-passed]=""
+  ></span>
+  </div>
+
+  <div class="stories" *ngIf="stories">
+  </div>
+</div>
