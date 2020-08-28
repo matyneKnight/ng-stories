@@ -2,9 +2,9 @@
   <div class="progress-bars">
     <span
       *ngFor="let storie of stories | keyvalue"
-      [style.--duration]="progressTimer/1000 + 's'"
+      [style.--duration]="timer + 's'"
       [class.bar-active]="activePosition == storie.key"
-      [class.bar-paused]=""
+      [class.bar-paused]="paused"
       [class.bar-passed]="activePosition >= storie.key"
     ></span>
   </div>
@@ -14,6 +14,8 @@
     *ngIf="stories"
     [class.media-storie]="stories[activePosition].type === 'image'"
     [style.--url]="'url(' + stories[activePosition].content + ')'"
+    (mousedown)="storyContentholddown()"
+    (mouseup)="storyContentholdup()"
   >
     <p *ngIf="stories[activePosition].type === 'text'">{{ stories[activePosition].content }}</p>
   </div>
