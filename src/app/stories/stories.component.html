@@ -1,13 +1,19 @@
 <div class="container">
   <div class="progress-bars">
     <span
-    *ngFor="let storie of stories | keyvalue"
-    [class.bar-active]=""
-    [class.bar-paused]=""
-    [class.bar-passed]=""
-  ></span>
+      *ngFor="let storie of stories | keyvalue"
+      [class.bar-active]=""
+      [class.bar-paused]=""
+      [class.bar-passed]=""
+    ></span>
   </div>
 
-  <div class="stories" *ngIf="stories">
+  <div
+    class="stories"
+    *ngIf="stories"
+    [class.media-storie]="stories[1].type === 'image'"
+    [style.--url]="'url(' + stories[1].content + ')'"
+  >
+    <p *ngIf="stories[1].type === 'text'">{{ stories[1].content }}</p>
   </div>
 </div>
