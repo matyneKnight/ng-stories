@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { KeyValue } from '@angular/common';
 import { IStorie } from './stories.interface';
 
 @Component({
   selector: 'app-stories',
   templateUrl: './stories.component.html',
-  styleUrls: ['./stories.component.scss']
+  styleUrls: ['./stories.component.scss'],
 })
 export class StoriesComponent implements OnInit, OnDestroy {
   private _stories: IStorie[] = null;
@@ -23,28 +24,29 @@ export class StoriesComponent implements OnInit, OnDestroy {
     return this._stories;
   }
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.handleProgressTiming();
   }
 
+  keyDescOrder(a, b) {
+    return 1;
+  }
+
   public handleProgressTiming(): void {
     this.timeStarted = Date.now();
-    this.progressTimerId = setTimeout(
-      () => {
-        this.timeRemains = this.timer * 1000;
-        if (this.activePosition < this.stories.length) {
-          this.handleProgressTiming();
-        }
+    this.progressTimerId = setTimeout(() => {
+      this.timeRemains = this.timer * 1000;
+      if (this.activePosition < this.stories.length) {
+        this.handleProgressTiming();
+      }
 
-        this.activePosition +=  1;
-        if (this.activePosition+1 == this.stories.length) {
-          clearTimeout(this.progressTimerId);
-        }
-      },
-      this.timeRemains
-    );
+      this.activePosition += 1;
+      if (this.activePosition + 1 == this.stories.length) {
+        clearTimeout(this.progressTimerId);
+      }
+    }, this.timeRemains);
   }
 
   public storyContentholddown(): void {
@@ -55,7 +57,41 @@ export class StoriesComponent implements OnInit, OnDestroy {
 
   public storyContentholdup(): void {
     this.paused = false;
-    this.handleProgressTiming();
+    if (this.activePosition + 1 < this.stories.length) {
+      this.handleProgressTiming();
+    }
+  }
+
+  public previous(): void {
+    if (this.activePosition > 0) {
+      clearTimeout(this.progressTimerId);
+      this.activePosition -= 1;
+      this.handleProgressTiming();
+    }
+  }
+
+  public next(): void {
+    if (this.activePosition + 1  < this.stories.length) {
+      clearTimeout(this.progressTimerId);
+      this.activePosition += 1;
+      this.handleProgressTiming();
+    }
+  }
+
+  public onSideClick(e): void {
+    const storie = document.getElementById('stories');
+
+    if (storie) {
+      const content_width = storie.offsetWidth;
+      const pos_x = e.pageX - storie.offsetLeft;
+
+      if (content_width / 2  > pos_x) {
+        this.previous();
+
+      } else {
+        this.next();
+      }
+    }
   }
 
   ngOnDestroy(): void {
@@ -63,5 +99,4 @@ export class StoriesComponent implements OnInit, OnDestroy {
       clearTimeout(this.progressTimerId);
     }
   }
-
 }

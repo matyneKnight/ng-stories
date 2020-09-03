@@ -1,22 +1,26 @@
 <div class="container">
+  <!-- progress bars to smooth show active storie -->
   <div class="progress-bars">
     <span
-      *ngFor="let storie of stories | keyvalue"
+      *ngFor="let storie of stories | keyvalue: keyDescOrder"
       [style.--duration]="timer + 's'"
       [class.bar-active]="activePosition == storie.key"
       [class.bar-paused]="paused"
       [class.bar-passed]="activePosition >= storie.key"
-    ></span>
+    >
+    </span>
   </div>
 
+  <!-- storie element section (switch between media or simple text) -->
   <div
-    class="stories"
+    id="stories"
     *ngIf="stories"
-    [class.media-storie]="stories[activePosition].type === 'image'"
-    [style.--url]="'url(' + stories[activePosition].content + ')'"
+    [class.media-storie]="stories[activePosition]?.type === 'image'"
+    [style.--url]="'url(' + stories[activePosition]?.content + ')'"
+    (click)="onSideClick($event)"
     (mousedown)="storyContentholddown()"
     (mouseup)="storyContentholdup()"
   >
-    <p *ngIf="stories[activePosition].type === 'text'">{{ stories[activePosition].content }}</p>
+  <p *ngIf="stories[activePosition].type === 'text'">{{ stories[activePosition]?.content }}</p>
   </div>
 </div>

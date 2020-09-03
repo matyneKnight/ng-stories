@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IStorie } from './stories/stories.interface';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'ng-stories';
 
-  stories = [
+  stories: IStorie[] = [
     {
       type: 'text',
       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis laboriosam, quo, quidem libero ex omnis accusamus necessitatibus distinctio, quod maxime in. Aspernatur quaerat maiores tenetur reprehenderit repudiandae temporibus repellendus animi.'
