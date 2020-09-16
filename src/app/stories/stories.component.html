@@ -1,5 +1,5 @@
 <div class="container">
-  <!-- progress bars to smooth show active storie -->
+  <!-- progress bars to smooth shows active storie -->
   <div class="progress-bars">
     <span
       *ngFor="let storie of stories | keyvalue: keyDescOrder"
@@ -17,10 +17,15 @@
     *ngIf="stories"
     [class.media-storie]="stories[activePosition]?.type === 'image'"
     [style.--url]="'url(' + stories[activePosition]?.content + ')'"
-    (click)="onSideClick($event)"
+  >
+  <i-feather *ngIf="activePosition > 0" name="chevron-left" (click)="previous()" class="arrow-icon"></i-feather>
+  <p 
+    *ngIf="stories[activePosition].type === 'text'"
     (mousedown)="storyContentholddown()"
     (mouseup)="storyContentholdup()"
-  >
-  <p *ngIf="stories[activePosition].type === 'text'">{{ stories[activePosition]?.content }}</p>
+    >
+      {{ stories[activePosition]?.content }}
+  </p>
+  <i-feather *ngIf="activePosition + 1 < this.stories.length" name="chevron-right" (click)="next()" class="arrow-icon"></i-feather>
   </div>
 </div>

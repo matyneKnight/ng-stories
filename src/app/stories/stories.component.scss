@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   width: 50%;
-  height: 50%;
 
   .progress-bars {
     z-index: 12000;
@@ -67,20 +66,41 @@
   #stories {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    height: 100%;
+    height: 50%;
 
     p {
       text-align: center;
-      display: flex;
-      flex-flow: column;
-      justify-content: center;
-      padding: 25px;
       font-size: 40px;
       color: white;
       letter-spacing: 0.44px;
       line-height: 60px;
       overflow: scroll;
+
+      &::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+      }
+    }
+
+    .arrow-icon {
+      background-color: transparent;
+      color: white;
+      stroke-width: 1.5px;
+      opacity: 0.5;
+      width: 35px;
+      height: 35px;
+      transform: scale(1);
+      transition: opacity 0.5s, transform 0.5s;
+
+      &:hover {
+        opacity: 1;
+        transform: scale(1.35);
+        stroke-width: 2px;
+        cursor: pointer;
+      }
     }
   }
 }

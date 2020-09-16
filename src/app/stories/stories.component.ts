@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { KeyValue } from '@angular/common';
 import { IStorie } from './stories.interface';
 
 @Component({
@@ -9,9 +8,9 @@ import { IStorie } from './stories.interface';
 })
 export class StoriesComponent implements OnInit, OnDestroy {
   private _stories: IStorie[] = null;
+  private _timer = 5;
   activePosition: number = 0;
   progressTimerId = null;
-  timer = 3;
   timeStarted = null;
   timeRemains = this.timer * 1000;
   paused = false;
@@ -22,6 +21,13 @@ export class StoriesComponent implements OnInit, OnDestroy {
   }
   get stories(): IStorie[] {
     return this._stories;
+  }
+
+  set timer(value: number) {
+    this._timer = value;
+  }
+  get timer(): number {
+    return this._timer;
   }
 
   constructor() {}
@@ -78,21 +84,21 @@ export class StoriesComponent implements OnInit, OnDestroy {
     }
   }
 
-  public onSideClick(e): void {
-    const storie = document.getElementById('stories');
+  // public onSideClick(e): void {
+  //   const storie = document.getElementById('stories');
 
-    if (storie) {
-      const content_width = storie.offsetWidth;
-      const pos_x = e.pageX - storie.offsetLeft;
+  //   if (storie) {
+  //     const content_width = storie.offsetWidth;
+  //     const pos_x = e.pageX - storie.offsetLeft;
 
-      if (content_width / 2  > pos_x) {
-        this.previous();
+  //     if (content_width / 2  > pos_x) {
+  //       this.previous();
 
-      } else {
-        this.next();
-      }
-    }
-  }
+  //     } else {
+  //       this.next();
+  //     }
+  //   }
+  // }
 
   ngOnDestroy(): void {
     if (this.progressTimerId) {
